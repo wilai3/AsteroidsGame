@@ -1,11 +1,17 @@
+//your variable declarations here
 Spaceship ship;
 Star [] sue;
+ArrayList <Asteroid> rocks;
 
 public void setup() 
 {
   size(500, 500);
   background(0);
   ship = new Spaceship();
+  rocks = new ArrayList <Asteroid>();
+  for (int i = 0; i < 11; i++){
+    rocks.add(new Asteroid());
+  }
   sue = new Star[150];
   for (int i = 0; i < sue.length; i++) {
     sue[i] = new Star();
@@ -17,6 +23,11 @@ public void draw()
   background(0);
   ship.move();
   ship.show();
+  for (int i = 0; i < rocks.size();i++){
+    rocks.get(i).move();
+    rocks.get(i).show();
+    
+  }
   for (int i = 0; i < sue.length; i++) {
     sue[i].show();
   }
@@ -33,9 +44,8 @@ public void draw()
     if (key == 'r'){
       ship.setXspeed(0);
       ship.setYspeed(0);
-      ship.setCenterX((int)(Math.random()*500));
-      ship.setCenterY((int)(Math.random()*500));
-      ship.setPointDirection(Math.random()*360);
+      ship.setCenterX((int)(Math.random()*400)+50);
+      ship.setCenterY((int)(Math.random()*400)+50);
     }
   }
 }
