@@ -1,37 +1,57 @@
-class Asteroid extends Floater{
-  private double rotSpeed;
-  Asteroid(){
-    corners = 6;
-    xCorners = new int[corners];
-    yCorners = new int[corners];
-    xCorners[0] = -8;
-    yCorners[0] = -8;
-    xCorners[1] = 7;
-    yCorners[1] = -8;
-    xCorners[2] = 13;
-    yCorners[2] = 0;
-    xCorners[3] = 6;
-    yCorners[3] = 10;
-    xCorners[4] = -8;
-    yCorners[4] = 8;
-    xCorners[5] = -5;
-    yCorners[5] = 0;
-    myColor = color(#555050);
-    myCenterX = Math.random()*500;
-    myCenterY = Math.random()*500;
-    myXspeed = Math.random()*4-2;
-    myYspeed = Math.random()*4-2;
-    myPointDirection = Math.random()*360;
-    rotSpeed = 1;
+//your variable declarations here
+Spaceship ship;
+Star [] sue;
+ArrayList <Asteroid> rocks;
+
+public void setup() 
+{
+  size(500, 500);
+  background(0);
+  ship = new Spaceship();
+  rocks = new ArrayList <Asteroid>();
+  for (int i = 0; i < 101; i++){
+      rocks.add(new Asteroid());
   }
-  public void move(){
-    turn(rotSpeed);
-    super.move();
+  sue = new Star[150];
+  for (int i = 0; i < sue.length; i++) {
+    sue[i] = new Star();
   }
-  public double getX(){
-    return myCenterX;
+}
+
+public void draw() 
+{
+  background(0);
+  ship.move();
+  ship.show();
+  for (int i = 0; i < rocks.size();i++){
+    rocks.get(i).move();
+    rocks.get(i).show();
+    float d = dist((float)ship.getX(), (float)ship.getY(), (float)rocks.get(i).getX(), (float)rocks.get(i).getY());
+    if (d < 15){
+      rocks.remove(i);
+    }
   }
-  public double getY(){
-    return myCenterY;
+  for (int i = 0; i < sue.length; i++) {
+    sue[i].show();
+  }
+  if (keyPressed) {
+    if (key == 'a') {
+      ship.turn(-8);
+    }
+    if (key == 'w'){
+      ship.accelerate(0.2);
+    }
+    if (key == 'd'){
+      ship.turn(8);
+    }
+    if (key == 's'){
+      ship.accelerate(-0.2);
+    }
+    if (key == 'r'){
+      ship.setXspeed(0);
+      ship.setYspeed(0);
+      ship.setCenterX((int)(Math.random()*400)+50);
+      ship.setCenterY((int)(Math.random()*400)+50);
+    }
   }
 }
