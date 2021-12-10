@@ -9,8 +9,8 @@ public void setup()
   background(0);
   ship = new Spaceship();
   rocks = new ArrayList <Asteroid>();
-  for (int i = 0; i < 11; i++){
-    rocks.add(new Asteroid());
+  for (int i = 0; i < 101; i++){
+      rocks.add(new Asteroid());
   }
   sue = new Star[150];
   for (int i = 0; i < sue.length; i++) {
@@ -26,7 +26,10 @@ public void draw()
   for (int i = 0; i < rocks.size();i++){
     rocks.get(i).move();
     rocks.get(i).show();
-    
+    float d = dist((float)ship.getX(), (float)ship.getY(), (float)rocks.get(i).getX(), (float)rocks.get(i).getY());
+    if (d < 15){
+      rocks.remove(i);
+    }
   }
   for (int i = 0; i < sue.length; i++) {
     sue[i].show();
@@ -36,10 +39,13 @@ public void draw()
       ship.turn(-8);
     }
     if (key == 'w'){
-      ship.accelerate(0.2);
+      ship.accelerate(0.1);
     }
     if (key == 'd'){
       ship.turn(8);
+    }
+    if (key == 's'){
+      ship.accelerate(-0.1);
     }
     if (key == 'r'){
       ship.setXspeed(0);
