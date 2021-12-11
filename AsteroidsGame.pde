@@ -55,5 +55,6 @@ public void draw()
       ship.setYspeed(0);
       ship.setCenterX((int)(Math.random()*400)+50);
       ship.setCenterY((int)(Math.random()*400)+50);
+      ship.setDirection((double)(Math.random()*360));
     }
   }
