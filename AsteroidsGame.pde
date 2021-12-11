@@ -47,7 +47,8 @@ public void draw()
     if (key == 's'){
       ship.accelerate(-0.1);
     }
-  }
+   }
+ } 
   public void keyPressed() {
   if (key == 'r'){
       ship.setXspeed(0);
@@ -56,4 +57,3 @@ public void draw()
       ship.setCenterY((int)(Math.random()*400)+50);
     }
   }
-}
